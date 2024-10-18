@@ -10,8 +10,13 @@ public class Trial : MonoBehaviour
 =======
     // I checked in - Kunal :)))    
     // The FitnessGram Pacer Test is a multistage aerobic capacity test that progressivel - karson 
+<<<<<<< HEAD
 >>>>>>> c9dcc3532d182659eee61a6596b199f682065542
+=======
+>>>>>>> 5a3b76bd0285683fe903d47937bef20bd8cc6066
     // Start is called before the first frame update
+    //Does this work - Isaac
+    //Shooby dooby doo bap - Esther
     void Start()
     {
         
