@@ -4,40 +4,44 @@ using UnityEngine;
 
 public class Movement2 : MonoBehaviour
 {
-    public float turnSpeed;
-    public float moveSpeed;
-    public Rigidbody2D rb;
-    Vector2 direction; 
-    Vector2 movementVector; 
-    float angle;
-
-
-    void Start()
+   private Rigidbody2D rb;
+    public float MovementSpeed;
+    public float rotateSpeed;
+    private Vector2 MovementInput;
+    // Start is called before the first frame update
+    void Awake()
     {
-
+        rb = GetComponent<Rigidbody2D>();
+       
     }
 
+    // Update is called once per frame
     void Update()
     {
-        float rightInput = (Input.GetAxis("Horizontal"))*(moveSpeed)*UnityEngine.Time.deltaTime;
-        float upInput = (Input.GetAxis("Vertical"))*(moveSpeed)*UnityEngine.Time.deltaTime;
-        movementVector = new Vector2(rightInput, upInput).normalized;
-         
+        Movement();
     }
 
-    void FixedUpdate() {
-        float mouseX = Input.GetAxis("Horizontal");
-        float mouseY = Input.GetAxis("Vertical");
-        direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 angleDirection = direction - rb.position;
-        angle = Mathf.Atan2(angleDirection.y, angleDirection.x) * Mathf.Rad2Deg - 90f;
+    private void Movement()
+    {
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        // this worked but it slowed down rotation massively idk why?? ill revisit it later its fine for now
-        // if ((mouseX!=0) || (mouseY!=0)) { 
-            rb.rotation = angle;
-        // }
+        Vector2 movementDirection = new Vector2(horizontal, vertical);
 
-        rb.velocity = new Vector2(movementVector.x * moveSpeed, movementVector.y * moveSpeed);
+        if (horizontal == 0 && vertical == 0) {
+            rb.velocity = new Vector2(0, 0);
+            return;
+        }
+
+        MovementInput = new Vector2(horizontal, vertical);
+        rb.velocity = MovementInput * MovementSpeed * Time.deltaTime;
+
+        if (movementDirection != Vector2.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+        }
+
     }
 
 }
