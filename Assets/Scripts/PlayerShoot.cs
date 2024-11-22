@@ -10,6 +10,9 @@ public class PlayerShoot : MonoBehaviour
     public Transform shootPosition;
     public float shootForce;
 
+    private float rubberbandChargeTime = 0f;
+    private const float maxRubberbandChargeTime = 2f;
+
     void Start()
     {
         
@@ -21,10 +24,29 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) {
             Shoot();
        }
+
+        //rubber band - adrian
+        if (Input.GetMouseButton(1))
+        {
+            rubberbandChargeTime += Time.deltaTime;
+            rubberbandChargeTime = Mathf.Clamp(rubberbandChargeTime, 0, maxRubberbandChargeTime);
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            ShootRubberband();
+            rubberbandChargeTime = 0f;
+        }
     }
 
     void Shoot() {
         GameObject newBullet = Instantiate(bulletPrefab, shootPosition.position, shootPosition.rotation);
         newBullet.GetComponent<Rigidbody2D>().AddForce(shootPosition.up * shootForce, ForceMode2D.Impulse);
+    }
+
+    void ShootRubberband()
+    {
+        GameObject newBullet = Instantiate(bulletPrefab, shootPosition.position, shootPosition.rotation);
+        newBullet.GetComponent<Rigidbody2D>().AddForce(shootPosition.up * shootForce * rubberbandChargeTime, ForceMode2D.Impulse);
+        Debug.Log(shootPosition.up * shootForce * rubberbandChargeTime);
     }
 }
