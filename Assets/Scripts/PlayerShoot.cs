@@ -26,12 +26,12 @@ public class PlayerShoot : MonoBehaviour
        }
 
         //rubber band - adrian
-        if (Input.GetMouseButton(1))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             rubberbandChargeTime += Time.deltaTime;
             rubberbandChargeTime = Mathf.Clamp(rubberbandChargeTime, 0, maxRubberbandChargeTime);
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetKeyUp(KeyCode.T))
         {
             ShootRubberband();
             rubberbandChargeTime = 0f;
