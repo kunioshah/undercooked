@@ -1099,7 +1099,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1982882598490040557, guid: 1086694eb461a334480b46bb7be0c810, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.32574075
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1982882598490040557, guid: 1086694eb461a334480b46bb7be0c810, type: 3}
       propertyPath: m_LocalScale.y
@@ -1145,6 +1145,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -59.725
       objectReference: {fileID: 0}
+    - target: {fileID: 1982882598490040557, guid: 1086694eb461a334480b46bb7be0c810, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6544414108623654858, guid: 1086694eb461a334480b46bb7be0c810, type: 3}
       propertyPath: m_SpriteSortPoint
       value: 0
@@ -1163,9 +1167,6 @@ PrefabInstance:
       addedObject: {fileID: 9158489892254475951}
     - targetCorrespondingSourceObject: {fileID: 8832206160302526458, guid: 1086694eb461a334480b46bb7be0c810, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9158489892254475950}
-    - targetCorrespondingSourceObject: {fileID: 8832206160302526458, guid: 1086694eb461a334480b46bb7be0c810, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 9158489892254475954}
     - targetCorrespondingSourceObject: {fileID: 8832206160302526458, guid: 1086694eb461a334480b46bb7be0c810, type: 3}
       insertIndex: -1
@@ -1176,51 +1177,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8832206160302526458, guid: 1086694eb461a334480b46bb7be0c810, type: 3}
   m_PrefabInstance: {fileID: 9158489892254475948}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &9158489892254475950
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9158489892254475949}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.00925456, y: -0.00072413683}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.912663, y: 0.9985517}
-  m_EdgeRadius: 0
 --- !u!50 &9158489892254475951
 Rigidbody2D:
   serializedVersion: 4
@@ -1259,7 +1215,7 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 7400000, guid: b1b57be0cfb3dff4e98dde460ae9ac17, type: 2}
+  - {fileID: 0}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -1274,7 +1230,7 @@ Animator:
   m_GameObject: {fileID: 9158489892254475949}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 50e1504ff91fba64ca8f29e22d7392da, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
