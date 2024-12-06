@@ -26,9 +26,10 @@ public class PlayerShoot : MonoBehaviour
        }
 
         //rubber band - adrian
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKey(KeyCode.T))
         {
             rubberbandChargeTime += Time.deltaTime;
+            //Debug.Log(rubberbandChargeTime);
             rubberbandChargeTime = Mathf.Clamp(rubberbandChargeTime, 0, maxRubberbandChargeTime);
         }
         if (Input.GetKeyUp(KeyCode.T))
@@ -47,6 +48,7 @@ public class PlayerShoot : MonoBehaviour
     {
         GameObject newBullet = Instantiate(bulletPrefab, shootPosition.position, shootPosition.rotation);
         newBullet.GetComponent<Rigidbody2D>().AddForce(shootPosition.up * shootForce * rubberbandChargeTime, ForceMode2D.Impulse);
-        Debug.Log(shootPosition.up * shootForce * rubberbandChargeTime);
+        //Debug.Log(shootPosition.up * shootForce * rubberbandChargeTime);
+        //Debug.Log(rubberbandChargeTime);
     }
 }
