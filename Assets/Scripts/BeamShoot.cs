@@ -19,7 +19,8 @@ public class BeamShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        animAim["BeamAimPhase"].wrapMode = WrapMode.Once;
+        animAim["BeamShoot"].wrapMode = WrapMode.Once;
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class BeamShoot : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            
+            GameObject newBeamAim = Instantiate(aimPrefab, shootPosition.position, shootPosition.rotation);
             rb.position = shootPosition.position;
             animAim.Play("BeamAimPhase");
         }
@@ -41,8 +42,9 @@ public class BeamShoot : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.B))
         {
+            Destroy(aimPrefab);
             GameObject newBeam = Instantiate(beam, rb.position, shootPosition.rotation);
-            animShoot.Play("BeamShoot");
+            //animShoot.Play("BeamShoot");
         }
     }
 }
