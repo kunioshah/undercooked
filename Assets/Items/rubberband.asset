@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 5
   item_type: 2
-  item_sprite: {fileID: 21300000, guid: df634725bc0144b61a8c8772b63e3d3f, type: 3}
+  item_sprite: {fileID: 21300000, guid: 9a3e4b6b6dfdc480a8f388df74827bcb, type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5661988823342506573}
   - component: {fileID: 2055882950797086014}
   m_Layer: 0
-  m_Name: rubberbands
+  m_Name: rubberband
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

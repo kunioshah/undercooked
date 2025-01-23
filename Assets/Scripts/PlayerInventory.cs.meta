@@ -3,7 +3,17 @@ guid: d6cfb37d05caf4ad0b01239109058122
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - cam: {instanceID: 0}
+  - pressToPickup_gameobject: {instanceID: 0}
+  - prazdnySlotImage: {instanceID: 0}
+  - throwObject_gameobject: {instanceID: 0}
+  - pencil_item: {instanceID: 0}
+  - paper_item: {instanceID: 0}
+  - rubberband_item: {instanceID: 0}
+  - pencil_prefab: {fileID: 1532177222574564985, guid: 8501e09a08f674c3e964c2b70e2d20cc, type: 3}
+  - paper_prefab: {fileID: 1659557475532225214, guid: d533d0b3b8bf94d24be775134f7ec2bb, type: 3}
+  - rubberband_prefab: {fileID: 8745878605191165831, guid: 181c8eaecca7f44968235769ccc856f6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
