@@ -5,32 +5,31 @@ using UnityEngine;
 
 public class BeamShoot : MonoBehaviour
 {
-    public GameObject aimPrefab;
-    public Transform shootPosition;
-    private Animation animAim;
-    private Animation animShoot;
-
+    public GameObject aim;
+    public GameObject beam;
     public Rigidbody2D rb;
+    public Rigidbody2D rbBeam;
+
+    public Transform shootPosition;
     Vector2 direction;
     float angle;
 
-    public GameObject beam;
+    private Animation animAim;
 
-    // Start is called before the first frame update
     void Start()
     {
         animAim["BeamAimPhase"].wrapMode = WrapMode.Once;
         animAim["BeamShoot"].wrapMode = WrapMode.Once;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            GameObject newBeamAim = Instantiate(aimPrefab, shootPosition.position, shootPosition.rotation);
+            aim.SetActive(true);
             rb.position = shootPosition.position;
-            animAim.Play("BeamAimPhase");
+            //animAim.Play("BeamAimPhase");
         }
         if (Input.GetKey(KeyCode.B))
         {
@@ -40,11 +39,12 @@ public class BeamShoot : MonoBehaviour
             rb.rotation = angle;
             rb.position = shootPosition.position;
         }
-        if (Input.GetKeyUp(KeyCode.B))
+        if (Input.GetKeyUp(KeyCode.B)) //&& !animAim.IsPlaying("BeamAimPhase") 
         {
-            Destroy(aimPrefab);
-            GameObject newBeam = Instantiate(beam, rb.position, shootPosition.rotation);
-            //animShoot.Play("BeamShoot");
+            aim.SetActive(false);
+            beam.SetActive(true);
+            rbBeam.position = rb.position;
+            rbBeam.rotation = rb.rotation;
         }
     }
 }
