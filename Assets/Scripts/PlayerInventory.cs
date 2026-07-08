@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour
 {
     public List<itemType> inventoryList;
-    public int playerReach;
+    public int playerReach = 2;
     [SerializeField] Camera cam;
     [SerializeField] GameObject pressToPickup_gameobject;
     [SerializeField] Image[] inventorySlotImage = new Image[9];
@@ -18,6 +18,8 @@ public class PlayerInventory : MonoBehaviour
 
     public int selectedItem = 0;
     public bool animationIsPlaying = false;
+    public LayerMask itemLayer;  // Only detect items with this layer
+
 
     [Space(10)]
 
@@ -52,7 +54,7 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
-        //    Animator animator = itemSetActive[inventoryList[selectedItem]].GetComponent<Animator>();
+            Animator animator = itemSetActive[inventoryList[selectedItem]].GetComponent<Animator>();
         //    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         //    string stateName = stateInfo.shortNameHash.ToString();
@@ -110,27 +112,54 @@ public class PlayerInventory : MonoBehaviour
         //        a++;
         //    }
 
-        //    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        //    RaycastHit hitInfo;
+        //Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        //RaycastHit hitInfo;
 
-        //    if (Physics.Raycast(ray, out hitInfo, playerReach) && Input.GetKey(pickUpItemKey))
+        //if (Physics.Raycast(ray, out hitInfo, playerReach) && Input.GetKey(pickUpItemKey))
+        //{
+        //    IPickable item = hitInfo.collider.GetComponent<IPickable>();
+        //    if (item != null)
         //    {
-        //        IPickable item = hitInfo.collider.GetComponent<IPickable>();
-        //        if (item != null)
-        //        {
-        //            pressToPickup_gameobject.SetActive(true);
-        //            inventoryList.Add(hitInfo.collider.GetComponent<ItemPickable>().weaponScriprableObject.item_type);
-        //            item.PickItem();
-        //        }
-        //        else
-        //        {
-        //            pressToPickup_gameobject.SetActive(false);
-        //        }
+        //        pressToPickup_gameobject.SetActive(true);
+        //        inventoryList.Add(hitInfo.collider.GetComponent<ItemPickable>().weaponScriprableObject.item_type);
+        //        item.PickItem();
         //    }
         //    else
         //    {
         //        pressToPickup_gameobject.SetActive(false);
         //    }
+        //}
+        //else
+        //{
+        //    pressToPickup_gameobject.SetActive(false);
+        //}
+
+        // Create a ray from the player’s position
+        Ray ray = new Ray(transform.position, transform.right);
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.right, playerReach, itemLayer);
+
+        if (hitInfo.collider != null && Input.GetKey(pickUpItemKey))
+        {
+            // Check for pickable item
+            IPickable item = hitInfo.collider.GetComponent<IPickable>();
+            ItemPickable itemPickable = hitInfo.collider.GetComponent<ItemPickable>();
+
+            if (item != null && itemPickable != null)
+            {
+                pressToPickup_gameobject.SetActive(true);
+
+                // Add item to inventory
+                inventoryList.Add(itemPickable.weaponScriprableObject.item_type);
+
+                // Execute item pickup logic
+                item.PickItem();
+            }
+        }
+        else
+        {
+            pressToPickup_gameobject.SetActive(false);
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0 && !animationIsPlaying)
         {
@@ -149,8 +178,14 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        // Visualize the raycast in the editor
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + transform.right * playerReach);
+    }
 
-        private void NewItemSelected()
+    private void NewItemSelected()
     {
         pencil_item.SetActive(false);
         paper_item.SetActive(false);
